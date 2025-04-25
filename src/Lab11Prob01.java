@@ -1,4 +1,5 @@
 import java.io.*;
+
 public class Lab11Prob01 {
     public static void main(String[] args) {
         String inputFile  = "src/people.dat";
@@ -7,21 +8,20 @@ public class Lab11Prob01 {
         try (
             DataInputStream  in  = new DataInputStream(
                                      new BufferedInputStream(
-                                       new FileInputStream(inputFile)));
+                                         new FileInputStream(inputFile)));
             DataOutputStream out = new DataOutputStream(
                                      new BufferedOutputStream(
-                                       new FileOutputStream(outputFile)));
+                                         new FileOutputStream(outputFile)));
         ) {
             while (true) {
                 int    age     = in.readInt();
-                String name    = in.readUTF();    
-                String address = in.readUTF();     
+                String name    = in.readUTF();
+                String address = in.readUTF();
                 int    zip     = in.readInt();
                 double salary  = in.readDouble();
 
-                System.out.printf(
-                  "Age: %d, Name: %s, Address: %s, Zip: %d, Salary: %.2f%n",
-                  age, name, address, zip, salary);
+                System.out.printf("%d %s %s %d %.2f%n",
+                                  age, name, address, zip, salary);
 
                 out.writeInt(age);
                 out.writeUTF(name);
@@ -30,7 +30,6 @@ public class Lab11Prob01 {
                 out.writeDouble(salary);
             }
         } catch (EOFException eof) {
-            System.out.println("Finished reading all records.");
         } catch (IOException io) {
             io.printStackTrace();
         }
